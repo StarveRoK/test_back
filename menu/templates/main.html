@@ -1,0 +1,27 @@
+{% load menu_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    {% render_menu "main_menu" as menu %}
+    {{ menu }}
+    {% for item in menu %}
+        <li class="{% if item.is_active %}active{% endif %}">
+            <a href="{{ item.item.url }}">{{ item.item.name }}</a>
+            {% if item.has_children %}
+                <ul>
+                    {% for child in item.children %}
+                        <li><a href="{{ child.url }}">{{ child.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
